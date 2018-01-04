@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: hadoop-master
+  labels:
+    app: apache
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: apache
+    spec:
+      hostname: hadoop-master
+      containers:
+      - name: hadoop-master
+        image: 172.16.234.101:5000/zjy/hadoop:2.7.4
+        env:
+        - name: CLUSTER_NUMBER
+          value: "2"
+        ports:
+        - containerPort: 22
+          hostPort: 22022
+        - containerPort: 8020
+          hostPort: 8020
+        - containerPort: 8088
+          hostPort: 8088
+        - containerPort: 50010
+          hostPort: 50010
+        - containerPort: 50020
+          hostPort: 50020
+        - containerPort: 50070
+          hostPort: 50070
+        - containerPort: 50075
+          hostPort: 50075
+      nodeSelector:
+        app: hadoop
+      restartPolicy: Always 
