@@ -20,3 +20,7 @@ kubectl scale statefulset hadoop-slave --replicas=2
 ```
 
 5. 在slave容器中添加master的主机信息（此处还未通过DNS识别）
+
+6. 启动hdfs
+
+`kubectl exec hadoop-master-*** start-all.sh`
